@@ -21,7 +21,12 @@ Trädstruktur för projektet
 .
 ├── analysis_options.yaml
 ├── bin
-│   └── dartprojekt_v02.dart
+├── dartprojekt_v02.dart
+│   └── helpers
+│   ├── input_helper.dart
+│   ├── sort_helper.dart
+│   ├── string_helper.dart
+│   └── validation_helper.dart
 ├── CHANGELOG.md
 ├── dartprojekt_v02.iml
 ├── pubspec.lock
@@ -30,6 +35,7 @@ Trädstruktur för projektet
 ├── resource
 │   └── superhero_ascii.txt
 └── test
+    └── sort_helper_test.dart
 ```
 
 ## Installation
@@ -95,9 +101,21 @@ Välj ett alternativ (1-4): 4
 [DEBUG] Verbose mode active.
 [DEBUG] Register storlek: 1.
 ```
+## Test
+4. När du står i katalogen dartprojekt_v02 katalogen. Kör följande kommando för att köra test.
+   ```bash
+   dart test/sort_helper_test.dart
+   eller
+   dart test
 
+### Exempel på output
+```text
+00:00 +0: herolist sort hero list based on strength
+
+00:00 +1: All tests passed!
+```
 
 ## Planerade förbättringar
-- Skapa enhetstester
+- Skapa fler enhetstester
 - Möjlighet att spara register så att den är tillgänglig vid nästa start.
 - Skapa top 3 lista
