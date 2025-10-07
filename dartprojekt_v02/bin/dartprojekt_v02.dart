@@ -3,6 +3,10 @@ import 'package:args/args.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
+// helper
+import 'helpers/input_helper.dart';
+import 'helpers/sort_helper.dart';
+
 const String version = '0.0.1';
 
 //----------------------------------
@@ -68,27 +72,6 @@ Future<void> printMenuHeader() async {
   print('==============================');
 }
 
-int readNumber(String prompt) {
-  while (true) {
-    stdout.write('$prompt: ');
-    String? input = stdin.readLineSync();
-    int? number = int.tryParse(input ?? '');
-    if (number != null) return number;
-    print('Fel: Ange ett giltigt alternativ (heltal).');
-  }
-}
-
-String readString(String prompt) {
-  while (true) {
-    stdout.write('$prompt: ');
-    String? input = stdin.readLineSync();
-    if (input != null) {
-      return input;
-    }
-    print('Fel: oväntat fel.');
-  }
-}
-
 MenueData printAndReturnChoice(int choice){
   bool run = true;
   switch (choice) {
@@ -120,19 +103,40 @@ Map<String, dynamic> recruitNewHero(List<Map<String, dynamic>> heroList){
   if(heroList.isNotEmpty){
     id = heroList.length + 1;
   }
-  String name = readString('\nAnge superhjälte namn');
+  String name = readString('\nAnge superhjälte namn', [], false);
   print('Du angav namn: $name');
 
-  String gender = readString('Ange kön (Man/Kvinna)');
+  const validTypes_gender = [
+    'Man',
+    'Kvinna',
+  ];
+  String gender = readString('Ange kön (Man/Kvinna)', validTypes_gender, true);
   print('Du angav kön : $gender');
 
-  String race = readString('Ange ras (Människa/Mutant/Kryptonier/Amazon/Android/Metamänniska/Utomjording)');
+
+  const validTypes_race = [
+    'Människa',
+    'Mutant',
+    'Kryptonier',
+    'Amazon',
+    'Android',
+    'Metamänniska',
+    'Utomjording',
+  ];
+  String race = readString('Ange ras (Människa/Mutant/Kryptonier/Amazon/Android/Metamänniska/Utomjording)', validTypes_race, true);
   print('Du angav ras: $race');
 
-  int strength = readNumber('Ange styrka (1-100)');
+  int strength = readNumber('Ange styrka (1-100)', 1, 100);
   print('Du angav styrka: $strength');
 
-  String alignment = readString('Ange moraliska inriktning (God/Ond/Neutral/Kaotisk/Ordningsam)');
+  const validTypes_alignment = [
+    'God',
+    'Ond',
+    'Neutral',
+    'Kaotisk',
+    'Ordningsam',
+  ];
+  String alignment = readString('Ange moraliska inriktning (God/Ond/Neutral/Kaotisk/Ordningsam)',validTypes_alignment,true);
   print('Du angav ras: $alignment');
 
   print('\nTryck [Enter] för att fortsätta...');
@@ -147,7 +151,7 @@ void printHeroList(List<Map<String, dynamic>> heroList) {
   if (heroList.isEmpty) {
     print('Fel: Inga hjältar tillagda ännu i registret.');
   } else {
-    heroList.sort((a, b) => b["strength"].compareTo(a["strength"]));
+    heroList = sortList(heroList, "strength");
 
     heroList.forEach((hero) {
       print(
@@ -169,7 +173,7 @@ void searchHero(List<Map<String, dynamic>> heroList) {
     return;
   }
 
-  String query = readString('\nAnge namn eller del av namn att söka efter');
+  String query = readString('\nAnge namn eller del av namn att söka efter', [], false);
   query = query.toLowerCase();
 
   var results = heroList.where(
@@ -218,7 +222,7 @@ Future<void> main(List<String> arguments) async {
     List<Map<String, dynamic>> heroList = [];
 
     await printMenuHeader();
-    int choice = readNumber('Välj ett alternativ (1-4)');
+    int choice = readNumber('Välj ett alternativ (1-4)', 1, 4);
     var res = printAndReturnChoice(choice);
 
     while (res.run) {
@@ -244,7 +248,7 @@ Future<void> main(List<String> arguments) async {
 
       // Repeat
       await printMenuHeader();
-      choice = readNumber('Välj ett alternativ (1-4)');
+      choice = readNumber('Välj ett alternativ (1-4)', 1,4);
       res = printAndReturnChoice(choice);
     }
 
