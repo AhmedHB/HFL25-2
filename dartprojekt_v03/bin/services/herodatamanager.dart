@@ -5,7 +5,7 @@ import '../helpers/sort_helper.dart';
 import '../repository/herorepository.dart';
 import '../repository/model/heromodel.dart';
 
-class HeroDataManager extends HeroDataManaging {
+class HeroDataManager implements HeroDataManaging {
   HeroDataManager._internal({HeroRepository? repository})
       : repository = repository ?? HeroRepository();
 
