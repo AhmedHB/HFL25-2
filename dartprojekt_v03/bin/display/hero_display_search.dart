@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 // helper
 import '../helpers/input_helper.dart';
 
+import '../repository/model/heromodel.dart';
 import '../services/herodatamanager.dart';
 
 //----------------------------------
@@ -14,7 +15,7 @@ import '../services/herodatamanager.dart';
 Future<void> searchHero() async {
   HeroDataManager heroManager = HeroDataManager();
 
-  print('\n==============================');
+  print('\n==================================');
 
   final scriptDir = p.dirname(Platform.script.toFilePath());
   String url = "";
@@ -28,10 +29,10 @@ Future<void> searchHero() async {
     print('File not found at: ${file.path}');
   }
 
-  print('\n==============================');
+  print('\n==================================');
 
-  final List<Map<String, dynamic>> heroList = await heroManager.getHeroList();
-  if (heroList.isEmpty) {
+  final List<HeroModel> heroes = await heroManager.getHeroList();
+  if (heroes.isEmpty) {
     print('\nFel: Det finns inga hjältar i registret ännu.\n');
     print('\nTryck [Enter] för att fortsätta...');
     stdin.readLineSync();
@@ -46,19 +47,22 @@ Future<void> searchHero() async {
   query = query.toLowerCase();
   var results = await heroManager.searchHero(query);
 
-  print('\n=== SÖKRESULTAT ==============');
+  print('\n=== SÖKRESULTAT ==================');
 
   if (results.isEmpty) {
     print('Fel: Ingen hjälte matchade "$query".');
   } else {
-    results.forEach((hero) {
+    for (final hero in results) {
       print(
-        '${hero["id"]} - ${hero["name"]} (${hero["race"]}) - Styrka: ${hero["strength"]}, Kön: ${hero["gender"]}, Inriktning: ${hero["alignment"]}',
+        '${hero.id} - ${hero.name} (${hero.appearance.race}) '
+        '- Styrka: ${hero.powerstats.strength}, '
+        'Kön: ${hero.appearance.gender}, '
+        'Inriktning: ${hero.biography.alignment}',
       );
-    });
+    }
   }
 
-  print('==============================\n');
+  print('==================================\n');
 
   print('\nTryck [Enter] för att fortsätta...');
   stdin.readLineSync();

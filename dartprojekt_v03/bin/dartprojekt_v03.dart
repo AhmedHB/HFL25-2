@@ -9,6 +9,7 @@ import 'display/hero_display_recruit.dart';
 import 'display/hero_display_printlist.dart';
 import 'display/hero_display_search.dart';
 
+import 'repository/model/heromodel.dart';
 import 'services/herodatamanager.dart';
 
 const String version = '0.0.3';
@@ -23,12 +24,14 @@ ArgParser buildParser() {
       abbr: 'h',
       negatable: false,
       help: 'Print this usage information.',
-    )..addFlag(
+    )
+    ..addFlag(
       'verbose',
       abbr: 'v',
       negatable: false,
       help: 'Show additional command output.',
-    )..addFlag('version', negatable: false, help: 'Print the tool version.');
+    )
+    ..addFlag('version', negatable: false, help: 'Print the tool version.');
 }
 
 void printUsage(ArgParser argParser) {
@@ -85,7 +88,7 @@ Future<void> main(List<String> arguments) async {
       // Do choice
       switch (res.choice) {
         case 1:
-          Map<String, dynamic> newHero = await recruitNewHero();
+          HeroModel newHero = await recruitNewHero();
           heroManager.saveHero(newHero);
           break;
 

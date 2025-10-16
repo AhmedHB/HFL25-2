@@ -21,12 +21,12 @@ class HeroRepository {
 
     filePath = '${dir.path}/$fileName';
 
-    print('[HeroRepository] Initialized FileDB at: $filePath');
+    //print('[HeroRepository] Initialized FileDB at: $filePath');
   }
 
   Future<bool> saveHero(HeroModel hero) async {
     // Clear cache
-    if(cachedHeroes.isNotEmpty){
+    if (cachedHeroes.isNotEmpty) {
       cachedHeroes.clear();
     }
 
@@ -45,14 +45,17 @@ class HeroRepository {
             return false;
           }
 
-          heroes = decoded.map<Map<String, dynamic>>((e) {
-            try {
-              return HeroModel.fromJson(e).toJson();
-            } catch (err) {
-              print('[HeroRepository] Error parsing hero: $err');
-              return {};
-            }
-          }).where((e) => e.isNotEmpty).toList();
+          heroes = decoded
+              .map<Map<String, dynamic>>((e) {
+                try {
+                  return HeroModel.fromJson(e).toJson();
+                } catch (err) {
+                  print('[HeroRepository] Error parsing hero: $err');
+                  return {};
+                }
+              })
+              .where((e) => e.isNotEmpty)
+              .toList();
         }
       }
 
@@ -69,8 +72,8 @@ class HeroRepository {
 
   Future<List<HeroModel>> getHeroes() async {
     // Return cache if not empty
-    if(cachedHeroes.isNotEmpty){
-        return cachedHeroes;
+    if (cachedHeroes.isNotEmpty) {
+      return cachedHeroes;
     }
 
     final file = File(filePath);
@@ -92,14 +95,17 @@ class HeroRepository {
         return [];
       }
 
-      final heroes = decoded.map((e) {
-        try {
-          return HeroModel.fromJson(e);
-        } catch (err) {
-          print('[HeroRepository] Error parsing hero: $err');
-          return null;
-        }
-      }).whereType<HeroModel>().toList();
+      final heroes = decoded
+          .map((e) {
+            try {
+              return HeroModel.fromJson(e);
+            } catch (err) {
+              print('[HeroRepository] Error parsing hero: $err');
+              return null;
+            }
+          })
+          .whereType<HeroModel>()
+          .toList();
 
       // refresh cache
       cachedHeroes = heroes;

@@ -14,20 +14,20 @@ Future<void> printMenuHeader() async {
     p.join(scriptDir, '../resource/ascii/superhero_ascii.txt'),
   );
   final file = File(filePath);
-  print('################################');
+  print('##################################');
   if (await file.exists()) {
     print(await file.readAsString());
   } else {
     print('File not found at: ${file.path}');
   }
-  print('==============================');
+  print('==================================');
   print('        HeroDex 3000!          ');
-  print('==============================');
+  print('==================================');
   print('1. Lägg till hjälte');
   print('2. Visa hjältar');
   print('3. Sök hjälte');
   print('4. Avsluta');
-  print('==============================');
+  print('==================================');
 }
 
 MenueData printAndReturnChoice(int choice) {
