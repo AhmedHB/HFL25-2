@@ -22,10 +22,9 @@ class HeroDataManager implements HeroDataManaging {
 
 
   @override
-  Future<bool> saveHero(Map<String, dynamic> heroMap) async {
+  Future<bool> saveHero(HeroModel heromodel) async {
     try {
-      final hero = HeroModel.fromJson(heroMap);
-      return await repository.saveHero(hero);
+      return await repository.saveHero(heromodel);
     } catch (e) {
       print('[HeroDataManager] Error saving hero: $e');
       return false;
@@ -33,22 +32,21 @@ class HeroDataManager implements HeroDataManaging {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getHeroList() async {
+  Future<List<HeroModel>> getHeroList() async {
     final heroes = await repository.getHeroes();
-    final heroMaps = heroes.map((hero) => hero.toJson()).toList();
-    if (heroMaps.isNotEmpty) {
-      return sortList(heroMaps, "strength");
+    if (heroes.isNotEmpty) {
+      return sortList(heroes, "strength");
     }
-    return heroMaps;
+    return heroes;
   }
 
   @override
-  Future<List<Map<String, dynamic>>> searchHero(String name) async {
+  Future<List<HeroModel>> searchHero(String name) async {
     final heroes = await repository.getHeroes();
-    final heroMaps = heroes.map((hero) => hero.toJson()).toList();
-    return heroMaps
+
+    return heroes
         .where((hero) =>
-        hero["name"].toString().toLowerCase().startsWith(name.toLowerCase()))
+        hero.name.toLowerCase().startsWith(name.toLowerCase()))
         .toList();
   }
 

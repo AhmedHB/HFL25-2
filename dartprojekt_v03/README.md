@@ -37,7 +37,13 @@ Trädstruktur för projektet
 │   ├── repository
 │   │   ├── herorepository.dart
 │   │   └── model
-│   │       └── heromodel.dart
+│   │       ├── appearance.dart
+│   │       ├── biography.dart
+│   │       ├── connections.dart
+│   │       ├── heroimage.dart
+│   │       ├── heromodel.dart
+│   │       ├── powerstats.dart
+│   │       └── work.dart
 │   └── services
 │       ├── herodatamanager.dart
 │       └── herodatamanaging.dart
@@ -136,13 +142,9 @@ Välj ett alternativ (1-4): 4
 00:00 +0: loading test/helpers/sort_helper_test.dart
 00:00 +0: test/helpers/sort_helper_test.dart: Sort_helper Tests sort hero list based on strength
 00:00 +1: test/services/herodatamanager_test.dart: HeroDataManager Tests saveHero saves hero successfully
-[HeroRepository] Initialized FileDB at: /Users/ahmedhb/development/flutter/course/inlamning/HFL25-2/dartprojekt_v03/resource/db/test.json
-00:00 +2: test/services/herodatamanager_test.dart: HeroDataManager Tests getHeroList returns list of heroes sorted by strength
-[HeroRepository] Initialized FileDB at: /Users/ahmedhb/development/flutter/course/inlamning/HFL25-2/dartprojekt_v03/resource/db/test.json
+00:00 +2: test/services/herodatamanager_test.dart: HeroDataManager Tests getHeroList returns heroes sorted by strength
 00:00 +3: test/services/herodatamanager_test.dart: HeroDataManager Tests searchHero finds hero by name
-[HeroRepository] Initialized FileDB at: /Users/ahmedhb/development/flutter/course/inlamning/HFL25-2/dartprojekt_v03/resource/db/test.json
 00:00 +4: test/services/herodatamanager_test.dart: HeroDataManager Tests getNextId returns correct next id
-[HeroRepository] Initialized FileDB at: /Users/ahmedhb/development/flutter/course/inlamning/HFL25-2/dartprojekt_v03/resource/db/test.json
 00:00 +5: All tests passed!
 ```
 

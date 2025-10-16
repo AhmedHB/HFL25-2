@@ -1,8 +1,13 @@
 // services/herodatamanaging.dart
 
+import '../repository/model/heromodel.dart';
+
 abstract class HeroDataManaging {
   Future<int> getNextId();
-  Future<bool> saveHero(Map<String, dynamic> heroMap);
-  Future<List<Map<String, dynamic>>> getHeroList();
-  Future<List<Map<String, dynamic>>> searchHero(String name);
+
+  Future<bool> saveHero(HeroModel heroMap);
+
+  Future<List<HeroModel>> getHeroList();
+
+  Future<List<HeroModel>> searchHero(String name);
 }
