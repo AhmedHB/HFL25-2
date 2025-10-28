@@ -95,8 +95,11 @@ Trädstruktur för projektet
    cd dartprojekt_v04
 
 ## Användning
-2. När du står i katalogen dartprojekt_v04. Kör följande kommando för att köra applikationen.
+2. När du står i katalogen dartprojekt_v04. Så behöver du skapa en .env fill med följande innehåll:
+   SUPERHERO_API_KEY=<din-nyckel-här>
+   Därefter kör följande kommando för att köra applikationen.
    ```bash
+   dart pub get
    dart run bin/dartprojekt_v04.dart
 
 ### Exempel på output
