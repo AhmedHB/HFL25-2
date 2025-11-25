@@ -66,7 +66,8 @@ tree -I "android|.idea|dart_tool|build|ios|linux|macos|web|windows"
    flutter run
 
 ## Test
-3. När du står i katalogen dartprojekt_v04 katalogen. Kör följande kommando för att köra test.
+3. När du står i katalogen fluttercalculatorprojekt_01 katalogen. Kör följande kommando för att köra test.
+3. När du står i katalogen fluttercalculatorprojekt_01 katalogen. Kör följande kommando för att köra test.
    ```bash
    flutter test --reporter expanded
 
