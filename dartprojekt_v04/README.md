@@ -139,7 +139,7 @@ Trädstruktur för projektet
 ```
 
 ## Utveckling
-3. När du står i katalogen dartprojekt_v03. Kör följande kommando för att köra applikationen i debugg läge.
+3. När du står i katalogen dartprojekt_v04. Kör följande kommando för att köra applikationen i debugg läge.
    ```bash
    dart run bin/dartprojekt_v04.dart --verbose
 
